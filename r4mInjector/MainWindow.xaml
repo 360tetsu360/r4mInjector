@@ -1,0 +1,31 @@
+﻿<Window x:Class="r4mInjector.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:r4mInjector"
+        ResizeMode="NoResize"
+        mc:Ignorable="d" Height="680" Width="1024" Icon="R.png" Closing="Window_Closing">
+    <Grid Loaded="Grid_Loaded">
+        <Label Content="R4M Injector" HorizontalAlignment="Left" Margin="33,0,0,0" VerticalAlignment="Top" FontFamily="Nirmala UI" FontSize="40"/>
+        <Button Content="Open File" HorizontalAlignment="Left" VerticalAlignment="Top" Width="400" Background="#FFF3F3F3" BorderBrush="White" Height="150" Margin="580,110,0,0" FontFamily="Nirmala UI" FontSize="20" Foreground="#FF2E2E2E" Click="Button_Click"/>
+        <Button Content="Inject" HorizontalAlignment="Left" VerticalAlignment="Top" Width="400" Background="#FFF3F3F3" BorderBrush="White" Height="150" Margin="580,265,0,0" FontSize="20" FontFamily="Nirmala UI" Foreground="#FF2E2E2E" Click="injectClick"/>
+        <Button Content="Open Logger - r4m" HorizontalAlignment="Left" VerticalAlignment="Top" Width="400" Background="#FFF3F3F3" BorderBrush="White" Height="150" Margin="580,420,0,0" FontFamily="Nirmala UI" FontSize="20" Foreground="#FF2E2E2E" Click="OpenLogger"/>
+        <ListBox HorizontalAlignment="Left" Height="460" Margin="33,110,0,0" VerticalAlignment="Top" Width="512" BorderBrush="White" Foreground="Black" x:Name="Dlllist">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Height="100">
+                        <TextBlock Text="{Binding Name}"
+                                       Margin="10" Foreground="#FF2E2E2E" FontFamily="Nirmala UI" FontSize="15"
+                                       />
+                        <TextBlock Text="{Binding FilePath}" HorizontalAlignment="Right" Margin="20"
+                                       Foreground="#FF2E2E2E" FontFamily="Nirmala UI" FontSize="10" VerticalAlignment="Bottom"
+                                       />
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <Label Content="Recent Dll's" HorizontalAlignment="Left" Margin="33,73.203,0,0" VerticalAlignment="Top" FontSize="20"/>
+        <Label Content="Tools" HorizontalAlignment="Left" Margin="580,73.203,0,0" VerticalAlignment="Top" FontSize="20"/>
+    </Grid>
+</Window>
