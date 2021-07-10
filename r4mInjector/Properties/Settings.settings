@@ -2,8 +2,8 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="r4mInjector.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="a" Type="System.String" Scope="User">
-      <Value Profile="(Default)">aaaaaaaa</Value>
+    <Setting Name="RecentFiles" Type="System.Collections.Specialized.StringCollection" Scope="User">
+      <Value Profile="(Default)" />
     </Setting>
   </Settings>
 </SettingsFile>

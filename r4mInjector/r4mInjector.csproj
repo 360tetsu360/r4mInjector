@@ -122,5 +122,23 @@
   <ItemGroup>
     <Resource Include="r4m.ico" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resource\folder.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resource\Inject.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resource\log.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resource\Inject2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resource\console2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resource\console.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

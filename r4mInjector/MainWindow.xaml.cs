@@ -16,6 +16,7 @@ using System.Collections.ObjectModel;
 using Microsoft.Win32;
 using System.IO;
 using System.Diagnostics;
+using System.Collections.Specialized;
 
 namespace r4mInjector
 {
@@ -29,6 +30,29 @@ namespace r4mInjector
         {
             InitializeComponent();
         }
+
+        [DllImport("user32.dll")]
+        static extern int GetWindowLong(IntPtr hwnd, int index);
+
+        [DllImport("user32.dll")]
+        static extern int SetWindowLong(IntPtr hwnd, int index, int newStyle);
+
+        [DllImport("user32.dll")]
+        static extern bool SetWindowPos(IntPtr hwnd, IntPtr hwndInsertAfter, int x,
+    int y, int width, int height, uint flags);
+
+        [DllImport("user32.dll")]
+        static extern IntPtr SendMessage(IntPtr hwnd, uint msg, IntPtr wParam, IntPtr
+    lParam);
+
+        const int GWL_EXSTYLE = -20;
+        const int WS_EX_DLGMODALFRAME = 0x0001;
+        const int SWP_NOSIZE = 0x0001;
+        const int SWP_NOMOVE = 0x0002;
+        const int SWP_NOZORDER = 0x0004;
+        const int SWP_FRAMECHANGED = 0x0020;
+        const uint WM_SETICON = 0x0080;
+
         private ObservableCollection<Dto> _dtos = new ObservableCollection<Dto>();
         ConsoleWindow console;
         private void Grid_Loaded(object sender, RoutedEventArgs e)
@@ -36,9 +60,26 @@ namespace r4mInjector
             Dlllist.ItemsSource = _dtos;
             console = new ConsoleWindow();
             console.Hide();
-            //MessageBox.Show(Properties.Settings.Default["b"].ToString());
-            //Properties.Settings.Default["b"] = "async";
-            //Properties.Settings.Default.Save();
+
+            StringCollection files = Properties.Settings.Default.RecentFiles;
+            if(files == null)
+            {
+                Properties.Settings.Default.RecentFiles= new StringCollection();
+            }
+            if(files != null)
+            {
+                foreach (string file in files)
+                {
+                    FileInfo fileInfo = new FileInfo(file);
+
+                    if (fileInfo.Directory.Exists)
+                    {
+                        string fileName = Path.GetFileName(file);
+                        _dtos.Add(new Dto(fileName, file));
+                    }
+                }
+            }
+            this.Icon = BitmapSource.Create(1, 1, 96, 96, PixelFormats.Bgra32, null, new byte[] { 0, 0, 0, 0 }, 4);
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -50,9 +91,25 @@ namespace r4mInjector
             if (ofd.ShowDialog() == true)
             {
                 string fileName = Path.GetFileName(ofd.FileName);
-                _dtos.Add(new Dto(fileName,ofd.FileName));
-
-
+                _dtos.Insert(0,new Dto(fileName, ofd.FileName));
+                bool isinprop = false;
+                StringCollection files = Properties.Settings.Default.RecentFiles;
+                if (files != null)
+                {
+                    foreach (string file in files)
+                    {
+                        if (fileName == file)
+                        {
+                            isinprop = true;
+                        }
+                    }
+                }
+                if (isinprop)
+                {
+                    Properties.Settings.Default.RecentFiles.Remove(fileName);
+                }
+                Properties.Settings.Default.RecentFiles.Insert(0,ofd.FileName);
+                Properties.Settings.Default.Save();
             }
         }
 
@@ -85,8 +142,20 @@ namespace r4mInjector
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            console.Close();
             Data.run = false;
+            console.kill();
+        }
+
+        private void Window_Unloaded(object sender, RoutedEventArgs e)
+        {
+            Data.run = false;
+
+        }
+
+        private void Window_Closed(object sender, EventArgs e)
+        {
+            Data.run = false;
+
         }
     }
     public sealed class Dto

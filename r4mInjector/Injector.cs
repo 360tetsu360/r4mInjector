@@ -48,7 +48,7 @@ namespace r4mInjector
 						break;
 					}
 					tries++;
-					//Console.WriteLine("FAIL #" + tries);
+					Console.WriteLine("FAIL #" + tries);
 					continue;
 				}
 				Process temptargetProc = possiblilties[0];
@@ -107,7 +107,7 @@ namespace r4mInjector
 
 			if (hThread != null)
 				Win32.CloseHandle(hThread);
-
+			MessageBox.Show("Injected!");
 			return;
 		}
 	}

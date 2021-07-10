@@ -25,13 +25,12 @@ namespace r4mInjector.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("aaaaaaaa")]
-        public string a {
+        public global::System.Collections.Specialized.StringCollection RecentFiles {
             get {
-                return ((string)(this["a"]));
+                return ((global::System.Collections.Specialized.StringCollection)(this["RecentFiles"]));
             }
             set {
-                this["a"] = value;
+                this["RecentFiles"] = value;
             }
         }
     }

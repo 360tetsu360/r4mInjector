@@ -31,14 +31,14 @@ namespace r4mInjector
             InitializeComponent();
             DataContext = dc;
             Loaded += ConsoleWindow_Loaded;
+            t = new Thread(watcher);
+            t.Start();
         }
 
         void ConsoleWindow_Loaded(object sender, RoutedEventArgs e)
         {
             InputBlock.KeyDown += InputBlock_KeyDown;
             InputBlock.Focus();
-            t = new Thread(watcher);
-            t.Start();
         }
 
         void InputBlock_KeyDown(object sender, KeyEventArgs e)
@@ -56,10 +56,13 @@ namespace r4mInjector
             string userName = Environment.UserName;
             string fileName = @"C:\Users\"+ userName +@"\AppData\Local\Packages\Microsoft.MinecraftUWP_8wekyb3d8bbwe\RoamingState\r4m.txt";
             FileInfo fileInfo = new FileInfo(fileName);
+
             if (!fileInfo.Directory.Exists)
             {
                 fileInfo.Directory.Create();
             }
+            StreamWriter writer = File.CreateText(fileName);
+            Console.SetOut(writer);
             //FileStream fileStream = fileInfo.Create();
 
             using (FileStream fs = new FileStream
@@ -85,6 +88,12 @@ namespace r4mInjector
         {
             dc.ConsoleInput = log;
             dc.RunCommand();
+        }
+
+        public void kill()
+        {
+            t.Abort();
+            this.Close();
         }
 
         private void Window_Closing(object sender, CancelEventArgs e)
