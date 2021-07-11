@@ -26,7 +26,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
+    <PlatformTarget>x64</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -43,6 +43,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -111,9 +112,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resource\icon.ico" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="R.png" />
   </ItemGroup>
   <ItemGroup>
@@ -123,22 +121,19 @@
     <Resource Include="r4m.ico" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resource\folder.png" />
+    <Resource Include="Resource\Settings.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resource\Inject.png" />
+    <Resource Include="Resource\folder2.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resource\log.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resource\Inject2.png" />
+    <Resource Include="Resource\inject3.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resource\console2.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resource\console.png" />
+    <Resource Include="Resource\settings2.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
